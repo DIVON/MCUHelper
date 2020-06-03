@@ -1,5 +1,5 @@
 ﻿using AutosarGuiEditor.Source.Utility;
-using MassConnector.ElfParsing;
+using MCUHelper.ElfParsing;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
 
-namespace MassConnector.Settings
+namespace MCUHelper.Settings
 {
     public class WindowPosition
     {

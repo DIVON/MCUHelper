@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace MassConnector.ElfParsing
+namespace MCUHelper.ElfParsing
 {
     class WriteCommand
     {

@@ -1,5 +1,5 @@
 ﻿using System.Windows.Forms;
-namespace MassConnector
+namespace MCUHelper
 {
     partial class VariableViewForm
     {
@@ -38,7 +38,6 @@ namespace MassConnector
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
-            this.button2 = new System.Windows.Forms.Button();
             this.newValueTextBox = new System.Windows.Forms.TextBox();
             this.variableTextBox = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -96,7 +95,7 @@ namespace MassConnector
             this.textBox1.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBox1.Location = new System.Drawing.Point(11, 57);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(661, 23);
+            this.textBox1.Size = new System.Drawing.Size(701, 23);
             this.textBox1.TabIndex = 14;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             this.textBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyDown);
@@ -116,17 +115,6 @@ namespace MassConnector
             this.timer2.Enabled = true;
             this.timer2.Interval = 25;
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
-            // 
-            // button2
-            // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.Image = global::MassConnector.Properties.Resources.Magnifier1;
-            this.button2.Location = new System.Drawing.Point(678, 57);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(34, 23);
-            this.button2.TabIndex = 17;
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // newValueTextBox
             // 
@@ -183,7 +171,6 @@ namespace MassConnector
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(721, 585);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.richTextBox1);
@@ -216,7 +203,6 @@ namespace MassConnector
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Timer timer2;
-        private Button button2;
         private TextBox newValueTextBox;
         private TextBox variableTextBox;
         private GroupBox groupBox1;

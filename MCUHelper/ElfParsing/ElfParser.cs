@@ -6,8 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
-namespace MassConnector.ElfParsing
+namespace MCUHelper.ElfParsing
 {
     public class ElfParser
     {
@@ -29,7 +30,7 @@ namespace MassConnector.ElfParsing
             this.fileName = fileName;
 
             p = new Process();
-            p.StartInfo.FileName = @"C:\Programs\Development\MassConnector\Data\arm-none-eabi-gdb.exe";
+            p.StartInfo.FileName = Path.GetDirectoryName(Application.ExecutablePath) + @"\Data\arm-none-eabi-gdb.exe";
             p.StartInfo.Arguments = "-q \"" + fileName + "\"";
             p.StartInfo.UseShellExecute = false;
             p.StartInfo.RedirectStandardOutput = true;

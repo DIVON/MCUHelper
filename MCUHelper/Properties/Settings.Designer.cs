@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MassConnector.Properties
+namespace MCUHelper.Properties
 {
 
 

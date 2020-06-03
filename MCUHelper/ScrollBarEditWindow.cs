@@ -1,4 +1,4 @@
-﻿using MassConnector.ElfParsing;
+﻿using MCUHelper.ElfParsing;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace MassConnector
+namespace MCUHelper
 {
     public partial class ScrollBarEditWindow : Form
     {

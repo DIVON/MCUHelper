@@ -1,4 +1,4 @@
-﻿namespace MassConnector
+﻿namespace MCUHelper
 {
     partial class MainWindow
     {

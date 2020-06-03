@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace MassConnector.Timers
+namespace MCUHelper.Timers
 {
     [StructLayout(LayoutKind.Sequential)]
     public struct TimerCaps

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MassConnector.ElfParsing
+namespace MCUHelper.ElfParsing
 {
     public interface IValuesUpdater
     {

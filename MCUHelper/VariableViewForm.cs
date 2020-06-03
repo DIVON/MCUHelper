@@ -8,14 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO.Ports;
-using MassConnector.ElfParsing;
-using MassConnector.Timers;
+using MCUHelper.ElfParsing;
+using MCUHelper.Timers;
 using System.Runtime.InteropServices;
 using HighResTimer;
 using System.Reflection;
 using System.Threading;
 
-namespace MassConnector
+namespace MCUHelper
 {
  
 
