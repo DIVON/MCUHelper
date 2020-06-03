@@ -29,7 +29,9 @@ namespace MCUHelper
         {
             InitializeComponent();
             RefreshComPorts();
-            
+
+            valuesUpdater = new SerialPortUpdater();
+
             displayTimer = new HighResolutionTimer(100.0f);
             displayTimer.UseHighPriorityThread = false;
             displayTimer.Elapsed += displayTimer_Elapsed;
@@ -72,19 +74,16 @@ namespace MCUHelper
         void RefreshComPorts()
         {
             string[] availablePorts = SerialPort.GetPortNames();
+            portsComboBox.Items.Clear();
             foreach(string port in availablePorts)
             {
                 portsComboBox.Items.Add(port);
             }
-            if (portsComboBox.Items.Count == 1u)
+
+            if (portsComboBox.Items.Count > 0)
             {
                 portsComboBox.SelectedIndex = 0;
-                connectButton_Click(null, null);
             }
-            portsComboBox.SelectedIndex = 1;
-
-            connectButton_Click(null, null);
-            //button1_Click_1(null, null);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -117,8 +116,7 @@ namespace MCUHelper
             if (connected == false)
             {
                 if (portsComboBox.SelectedIndex != -1)
-                {
-                    valuesUpdater = new SerialPortUpdater();
+                {                    
                     ((SerialPortUpdater)valuesUpdater).Port.PortName = portsComboBox.SelectedItem as String;
                     valuesUpdater.SetVariablesList(variablesList);
                     valuesUpdater.StartUpdate();
