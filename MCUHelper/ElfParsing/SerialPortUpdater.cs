@@ -116,11 +116,6 @@ namespace MCUHelper.ElfParsing
 
             WriteCommand command = new WriteCommand(var, value);
             writeCommands.Enqueue(command);
-            //writeCommands.Enqueue(command);
-            //writeCommands.Enqueue(command);
-            //writeCommands.Enqueue(command);
-            //writeCommands.Enqueue(command);
-            //writeCommands.Enqueue(command);
         }
 
         Thread getValueThread;
@@ -202,12 +197,14 @@ namespace MCUHelper.ElfParsing
                         {
                             WriteCommand nextWriteCommand = writeCommands.Dequeue();
                             nextWriteCommand.Send(serialPort);
-                            //Thread.Sleep(5);
                         }
                         else
                         {
                             SendReadCommand();
-                            getDataEvent.WaitOne(50);
+                            if (getDataEvent.WaitOne(50) == false)
+                            {
+
+                            }
                         }
                     }
                 }
@@ -265,25 +262,30 @@ namespace MCUHelper.ElfParsing
                 }
                 else
                 {
+                    int byteIndex = 0;
                     for (int i = prevLastIndex; i < fields.Count; i++)
-                    {
+                    {    
                         int address = Convert.ToInt32(fields[i].Address, 16);
-                        data[(i % MaxVariableCount) * 4 + 2] = (byte)(address & 0xFF);
-                        data[(i % MaxVariableCount) * 4 + 2 + 1] = (byte)((address >> 8) & 0xFF);
-                        data[(i % MaxVariableCount) * 4 + 2 + 2] = (byte)((address >> 16) & 0xFF);
-                        data[(i % MaxVariableCount) * 4 + 2 + 3] = (byte)((address >> 24) & 0xFF);
+                        int startByteIndex = byteIndex * 4 + 2;
+                        data[startByteIndex] = (byte)(address & 0xFF);
+                        data[startByteIndex + 1] = (byte)((address >> 8) & 0xFF);
+                        data[startByteIndex + 2] = (byte)((address >> 16) & 0xFF);
+                        data[startByteIndex + 3] = (byte)((address >> 24) & 0xFF);
+                        byteIndex++;
                     }
-
+                
                     int count = fields.Count - prevLastIndex;
                     for (int i = 0; i < MaxVariableCount - count; i++)
                     {
                         int address = Convert.ToInt32(fields[i].Address, 16);
-                        data[(i % MaxVariableCount) * 4 + 2] = (byte)(address & 0xFF);
-                        data[(i % MaxVariableCount) * 4 + 2 + 1] = (byte)((address >> 8) & 0xFF);
-                        data[(i % MaxVariableCount) * 4 + 2 + 2] = (byte)((address >> 16) & 0xFF);
-                        data[(i % MaxVariableCount) * 4 + 2 + 3] = (byte)((address >> 24) & 0xFF);
+                        int startByteIndex = byteIndex * 4 + 2;
+                        data[startByteIndex] = (byte)(address & 0xFF);
+                        data[startByteIndex + 1] = (byte)((address >> 8) & 0xFF);
+                        data[startByteIndex + 2] = (byte)((address >> 16) & 0xFF);
+                        data[startByteIndex + 3] = (byte)((address >> 24) & 0xFF);
+                        byteIndex++;
                     }
-
+                
                     prevLastIndex = MaxVariableCount - count;
                 }
             }

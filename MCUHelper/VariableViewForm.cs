@@ -224,13 +224,13 @@ namespace MCUHelper
                     {
                         text += PrintVariable(variable, 0);
                     }
-                    if (!richTextBox1.SelectedText.Equals(text))
+                   // if (!richTextBox1.SelectedText.Equals(text))
                     {
-                        richTextBox1.Suspend();
+                        //richTextBox1.Suspend();
                         richTextBox1.Text = text;
                         //richTextBox1.SelectAll();
                         //richTextBox1.SelectedText = text;
-                        richTextBox1.Resume();
+                        //richTextBox1.Resume();
                     }
                 }
             }

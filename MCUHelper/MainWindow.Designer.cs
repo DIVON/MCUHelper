@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -149,6 +150,10 @@
             // 
             this.elfFileDialog.Filter = "Elf files|*.elf|All files|*.*";
             // 
+            // openViewDialog
+            // 
+            this.openViewDialog.Filter = "Vmm files|*.vmm|All files|*.*";
+            // 
             // controlExtensionsBindingSource
             // 
             this.controlExtensionsBindingSource.DataSource = typeof(System.Windows.Forms.ControlExtensions);
@@ -160,6 +165,7 @@
             this.ClientSize = new System.Drawing.Size(843, 594);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainWindow";
