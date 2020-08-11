@@ -298,18 +298,34 @@ namespace MCUHelper
 
         }
 
+        private int GetCharacterIndexOfSelection()
+        {
+            var wordWrappedIndex = richTextBox1.SelectionStart;
+
+            RichTextBox scratch = new RichTextBox();
+            scratch.Lines = richTextBox1.Lines;
+            scratch.SelectionStart = wordWrappedIndex;
+            scratch.SelectionLength = 1;
+            scratch.WordWrap = false;
+            return scratch.SelectionStart;
+        }
+
+        private int GetLineNumberOfSelection()
+        {
+            var selectionStartIndex = GetCharacterIndexOfSelection();
+
+            RichTextBox scratch = new RichTextBox();
+            scratch.Lines = richTextBox1.Lines;
+            scratch.SelectionStart = selectionStartIndex;
+            scratch.SelectionLength = 1;
+            scratch.WordWrap = false;
+            return scratch.GetLineFromCharIndex(selectionStartIndex);
+        }
+
         ElfVariable clickedVar;
         private void richTextBox1_Click(object sender, EventArgs e)
         {
-            MouseEventArgs mArg = (MouseEventArgs)e;
-            int lineIndex = mArg.Y / richTextBox1.Font.Height;
-            clickedVar = variablesList.GetVariableByIndex(lineIndex);
-            if (clickedVar != null)
-            {
-                variableTextBox.Text = clickedVar.FullName;
-                newValueTextBox.Enabled = !(clickedVar is ElfObjectWithChildrens);
-                newValueTextBox.Text = clickedVar.GetStrValue();
-            }
+            
         }
 
         private void newValueTextBox_KeyDown(object sender, KeyEventArgs e)
@@ -336,6 +352,19 @@ namespace MCUHelper
         private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void richTextBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            //MouseEventArgs mArg = (MouseEventArgs)e;
+            int lineIndex = GetLineNumberOfSelection();
+            clickedVar = variablesList.GetVariableByIndex(lineIndex);
+            if (clickedVar != null)
+            {
+                variableTextBox.Text = clickedVar.FullName;
+                newValueTextBox.Enabled = !(clickedVar is ElfObjectWithChildrens);
+                newValueTextBox.Text = clickedVar.GetStrValue();
+            }
         }
 
         

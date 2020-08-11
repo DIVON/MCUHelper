@@ -191,7 +191,7 @@ namespace MCUHelper.ElfParsing
         short _value;
         public override void UpdateValue(byte[] value)
         {
-            short val = (short)(value[1] << 8 | value[0]);
+            short val = Convert.ToInt16(value[1] << 8 | value[0]);
             _value = val;
         }
 
@@ -217,7 +217,7 @@ namespace MCUHelper.ElfParsing
         UInt16 _value;
         public override void UpdateValue(byte[] value)
         {
-            var val = (ushort)(value[1] << 8 + value[0]);
+            var val = Convert.ToUInt16(value[1] * 256 + value[0]);
             _value = val;
         }
 
@@ -243,7 +243,7 @@ namespace MCUHelper.ElfParsing
         Int32 _value;
         public override void UpdateValue(byte[] value)
         {
-            var val = (int)((value[3] << 24) + (value[2] << 16) + (value[1] << 8) + value[0]);
+            var val = Convert.ToInt32((value[3] << 24) + (value[2] << 16) + (value[1] << 8) + value[0]);
             _value = val;
         }
 
@@ -269,7 +269,7 @@ namespace MCUHelper.ElfParsing
         UInt32 _value;
         public override void UpdateValue(byte[] value)
         {
-            var val = (uint)((value[3] << 24) + (value[2] << 16) + (value[1] << 8) + value[0]);
+            var val = Convert.ToUInt32((value[3] << 24) + (value[2] << 16) + (value[1] << 8) + value[0]);
             _value = val;
         }
 
@@ -295,7 +295,7 @@ namespace MCUHelper.ElfParsing
         Int32 _value;
         public override void UpdateValue(byte[] value)
         {
-            var val = (int)((value[3] << 24) + (value[2] << 16) + (value[1] << 8) + value[0]);
+            var val = Convert.ToInt32((value[3] << 24) + (value[2] << 16) + (value[1] << 8) + value[0]);
             _value = val;
         }
 
@@ -321,7 +321,7 @@ namespace MCUHelper.ElfParsing
         UInt32 _value;
         public override void UpdateValue(byte[] value)
         {
-            var val = (uint)((value[3] << 24) | (value[2] << 16) | (value[1] << 8) | value[0]);
+            var val = Convert.ToUInt32((value[3] << 24) | (value[2] << 16) | (value[1] << 8) | value[0]);
             _value = val;
         }
 
@@ -359,7 +359,12 @@ namespace MCUHelper.ElfParsing
 
         public override String GetStrValue()
         {
-            return _value.ToString().Replace(",", ".");
+            string addStr = "";
+            if (_value > 0)
+            {
+                addStr = " ";
+            }
+            return addStr + _value.ToString().Replace(",", ".");
         }
 
         public static int getBytes(String val)
@@ -386,7 +391,7 @@ namespace MCUHelper.ElfParsing
         uint _value;
         public override void UpdateValue(byte[] value)
         {
-            var val = (uint)((value[3] << 24) | (value[2] << 16) | (value[1] << 8) | value[0]);
+            var val = Convert.ToUInt32((value[3] << 24) | (value[2] << 16) | (value[1] << 8) | value[0]);
             _value = val;
         }
 

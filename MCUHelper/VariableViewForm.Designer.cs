@@ -154,7 +154,9 @@ namespace MCUHelper
             this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.richTextBox1.AutoWordSelection = true;
             this.richTextBox1.BackColor = System.Drawing.SystemColors.Menu;
+            this.richTextBox1.DetectUrls = false;
             this.richTextBox1.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.richTextBox1.Location = new System.Drawing.Point(11, 86);
             this.richTextBox1.Name = "richTextBox1";
@@ -165,6 +167,7 @@ namespace MCUHelper
             this.richTextBox1.WordWrap = false;
             this.richTextBox1.Click += new System.EventHandler(this.richTextBox1_Click);
             this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
+            this.richTextBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.richTextBox1_MouseDown);
             // 
             // VariableViewForm
             // 

@@ -138,8 +138,8 @@ namespace MCUHelper.Settings
                 
 
                 window.VariablesList = variablesList;
-                window.SetMax(Int32.Parse(forms.ElementAt(i).Element("Max").Value));
-                window.SetMin(Int32.Parse(forms.ElementAt(i).Element("Min").Value));
+                //window.SetMax(Int32.Parse(forms.ElementAt(i).Element("Max").Value));
+                //window.SetMin(Int32.Parse(forms.ElementAt(i).Element("Min").Value));
                 window.UpdateIndex(Int32.Parse(forms.ElementAt(i).Element("Index").Value));
                 
                 window.MdiParent = mainWindow;

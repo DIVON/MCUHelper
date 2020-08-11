@@ -93,7 +93,7 @@ namespace MCUHelper.ElfParsing
             p.BeginOutputReadLine();
             Boolean res = false;
             int ticks = 0;
-            const int maxWait = 3000;
+            const int maxWait = 300;
             do
             {
                 
@@ -106,7 +106,7 @@ namespace MCUHelper.ElfParsing
                     if (ticks > maxWait)
                     {
                         p.CancelOutputRead();
-                        return "";
+                        return "No symbol";
                     }
                 }
                 else
@@ -134,7 +134,7 @@ namespace MCUHelper.ElfParsing
             {
                 writer.WriteLine(gdbCommand);
                 ret = ReadLines(waitPeriod);
-            } while ((ret.Length == 0) && (repeats > 0));
+            } while ((ret.Length == 0) && (repeats-- > 0));
 
             /* Remove repeated parts */
             if (ret.Length % 2 == 0)
