@@ -360,7 +360,7 @@ namespace MCUHelper.ElfParsing
         public override String GetStrValue()
         {
             string addStr = "";
-            if (_value > 0)
+            if (_value >= 0)
             {
                 addStr = " ";
             }
