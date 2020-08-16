@@ -3,9 +3,9 @@
  *
  * Implementation for UartReceiver_Refresh
  *
- * $Author:  $
- * $Date: $
- * $Revision:  $
+ * $Author: ivan.davydenko $
+ * $Date: 2020-06-28 13:45:57 +0300 (Вс, 28 июн 2020) $
+ * $Revision: 497 $
  *
  */
 
@@ -230,6 +230,10 @@ void UartReceiver_ruRefresh(void)
 
                     HAL_UART_Receive_DMA(&huart1, receiveBuffer, RECEIVE_BUF_LEN);
                 }
+            }
+            if (HAL_DMA_STATE_READY == huart1.hdmarx->State)
+            {
+                HAL_UART_Receive_DMA(&huart1, receiveBuffer, RECEIVE_BUF_LEN);
             }
             /* wait a message */
             break;
