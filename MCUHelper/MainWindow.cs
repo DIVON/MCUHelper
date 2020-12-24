@@ -119,5 +119,10 @@ namespace MCUHelper
                 Properties.Settings.Default.Save();
             }
         }
+
+        private void MainWindow_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            System.Windows.Forms.Application.Exit();
+        }
     }
 }

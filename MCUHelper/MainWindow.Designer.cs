@@ -90,7 +90,7 @@
             this.elfToolStripMenuItem,
             this.viewToolStripMenuItem});
             this.openElfToolStripMenuItem.Name = "openElfToolStripMenuItem";
-            this.openElfToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openElfToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.openElfToolStripMenuItem.Text = "Open";
             // 
             // elfToolStripMenuItem
@@ -110,43 +110,43 @@
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(122, 6);
             // 
             // saveViewToolStripMenuItem
             // 
             this.saveViewToolStripMenuItem.Name = "saveViewToolStripMenuItem";
-            this.saveViewToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveViewToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.saveViewToolStripMenuItem.Text = "Save view";
             this.saveViewToolStripMenuItem.Click += new System.EventHandler(this.saveViewToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(122, 6);
             // 
             // lastElfToolStripMenuItem
             // 
             this.lastElfToolStripMenuItem.Name = "lastElfToolStripMenuItem";
-            this.lastElfToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.lastElfToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.lastElfToolStripMenuItem.Text = "LastElf";
             this.lastElfToolStripMenuItem.Click += new System.EventHandler(this.lastElfToolStripMenuItem_Click);
             // 
             // lastViewToolStripMenuItem
             // 
             this.lastViewToolStripMenuItem.Name = "lastViewToolStripMenuItem";
-            this.lastViewToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.lastViewToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.lastViewToolStripMenuItem.Text = "LastView";
             this.lastViewToolStripMenuItem.Click += new System.EventHandler(this.lastViewToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(122, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
             // editToolStripMenuItem
@@ -184,6 +184,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainWindow";
             this.Text = "MCU Helper";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainWindow_FormClosed);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
