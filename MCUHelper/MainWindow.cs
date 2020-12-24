@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,12 @@ namespace MCUHelper
         public MainWindow()
         {
             InitializeComponent();
+
+            if (File.Exists(Properties.Settings.Default.LastElf0))
+            {
+                lastElfToolStripMenuItem.Text = "Last elf: " + Properties.Settings.Default.LastElf0;
+                lastViewToolStripMenuItem.Text = "Last view: " + Properties.Settings.Default.LastView0;
+            }
         }
 
         public VariableViewForm variablesForm;
@@ -30,6 +37,8 @@ namespace MCUHelper
                 variablesForm.MdiParent = this;
                 variablesForm.Show();
 
+                Properties.Settings.Default.LastElf0 = elfFileDialog.FileName;
+                Properties.Settings.Default.Save();
             }
         }
 
@@ -41,6 +50,8 @@ namespace MCUHelper
                 {
                     ViewerSettings settingsSaver = new ViewerSettings();
                     settingsSaver.SaveToFile(saveViewDialog.FileName, variablesForm.VariablesList, this, variablesForm, scrollBarWindows);
+                    Properties.Settings.Default.LastView0 = saveViewDialog.FileName;
+                    Properties.Settings.Default.Save();
                 }
             }
             else
@@ -57,6 +68,8 @@ namespace MCUHelper
                 {
                     ViewerSettings settingsSaver = new ViewerSettings();
                     settingsSaver.LoadFromFile(openViewDialog.FileName, variablesForm.VariablesList, this, variablesForm, scrollBarWindows);
+                    Properties.Settings.Default.LastView0 = openViewDialog.FileName;
+                    Properties.Settings.Default.Save();
                 }
             }
             else
@@ -83,6 +96,28 @@ namespace MCUHelper
         void scrollBarWindow_FormClosed(object sender, FormClosedEventArgs e)
         {
             scrollBarWindows.Remove(sender as ScrollBarEditWindow);
+        }
+
+        private void lastElfToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (File.Exists(Properties.Settings.Default.LastElf0))
+            {
+                variablesForm = new VariableViewForm();
+                variablesForm.LoadElf(Properties.Settings.Default.LastElf0);
+                variablesForm.MdiParent = this;
+                variablesForm.Show();
+            }
+        }
+
+        private void lastViewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (File.Exists(Properties.Settings.Default.LastElf0))
+            {
+                ViewerSettings settingsSaver = new ViewerSettings();
+                settingsSaver.LoadFromFile(Properties.Settings.Default.LastView0, variablesForm.VariablesList, this, variablesForm, scrollBarWindows);
+                Properties.Settings.Default.LastView0 = openViewDialog.FileName;
+                Properties.Settings.Default.Save();
+            }
         }
     }
 }

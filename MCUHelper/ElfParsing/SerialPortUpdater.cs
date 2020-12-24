@@ -102,6 +102,7 @@ namespace MCUHelper.ElfParsing
         void IValuesUpdater.AddWriteCommand(ElfVariable var, String newValue)
         {
             int value = 0;
+            int.TryParse(newValue, out value);
 
             if (var is ElfEnum)
             {
@@ -110,8 +111,48 @@ namespace MCUHelper.ElfParsing
             }
             else if (var is ElfFloat)
             {
-                ElfFloat elffloat = (ElfFloat)var;
-                value = ElfFloat.getBytes(newValue);
+                ElfFloat elfVar = (ElfFloat)var;
+                value = elfVar.GetBytes(newValue);
+            }
+            else if (var is ElfChar)
+            {
+                ElfChar elfVar = (ElfChar)var;
+                value = elfVar.GetBytes(newValue);
+            }
+            else if (var is ElfUnsignedChar)
+            {
+                ElfUnsignedChar elfVar = (ElfUnsignedChar)var;
+                value = elfVar.GetBytes(newValue);
+            }
+            else if (var is ElfShort)
+            {
+                ElfShort elfVar = (ElfShort)var;
+                value = elfVar.GetBytes(newValue);
+            }
+            else if (var is ElfUnsignedShort)
+            {
+                ElfUnsignedShort elfVar = (ElfUnsignedShort)var;
+                value = elfVar.GetBytes(newValue);
+            }
+            else if (var is ElfInt)
+            {
+                ElfInt elfVar = (ElfInt)var;
+                value = elfVar.GetBytes(newValue);
+            }
+            else if (var is ElfUnsignedInt)
+            {
+                ElfUnsignedInt elfVar = (ElfUnsignedInt)var;
+                value = elfVar.GetBytes(newValue);
+            }
+            else if (var is ElfLong)
+            {
+                ElfLong elfVar = (ElfLong)var;
+                value = elfVar.GetBytes(newValue);
+            }
+            else if (var is ElfUnsignedLong)
+            {
+                ElfUnsignedLong elfVar = (ElfUnsignedLong)var;
+                value = elfVar.GetBytes(newValue);
             }
 
             WriteCommand command = new WriteCommand(var, value);

@@ -182,18 +182,12 @@ namespace MCUHelper
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            //parser = new ElfParser(@"D:\Projects\MASS\MCU\Debug\SuspensionStand.elf");
+            parser = new ElfParser(@"D:\Projects\MASS\MCU\Debug\SuspensionStand.elf");
 
             variablesList = new MainVariablesList(parser);
 
-            variablesList.UpdateVariable("cinSliderAngleProvider.Rte_WriteField_SliderPosition_Position", null, "cinSliderAngleProvider.Rte_WriteField_SliderPosition_Position");
-            variablesList.UpdateVariable("cinHallFilterCh1.Rte_WriteField_FilteredData_qualifiedADC.adcValue", null, "cinHallFilterCh1.Rte_WriteField_FilteredData_qualifiedADC.adcValue");
-            variablesList.UpdateVariable("cinHallFilterCh2.Rte_WriteField_FilteredData_qualifiedADC.adcValue", null, "cinHallFilterCh2.Rte_WriteField_FilteredData_qualifiedADC.adcValue");
-            variablesList.UpdateVariable("cinHallFilterCh3.Rte_WriteField_FilteredData_qualifiedADC.adcValue", null, "cinHallFilterCh3.Rte_WriteField_FilteredData_qualifiedADC.adcValue");
-            variablesList.UpdateVariable("cinBatteryVoltageFilter.Rte_WriteField_FilteredData_qualifiedADC.adcValue", null, "cinBatteryVoltageFilter.Rte_WriteField_FilteredData_qualifiedADC.adcValue");
-            variablesList.UpdateVariable("cinBatteryVoltageProvider.Rte_WriteField_BatteryVoltage_Voltage", null, "cinBatteryVoltageProvider.Rte_WriteField_BatteryVoltage_Voltage");
-            //variablesList.UpdateVariable("testStruct", null, "testStruct");
-            //variablesList.UpdateVariable("testStruct[0]", null, "testStruct[0]");
+            variablesList.UpdateVariable("cinADCDriver", null, "cinADCDriver");
+            variablesList.UpdateVariable("cinBatteryVoltageProvider", null, "cinBatteryVoltageProvider");
 
             valuesUpdater.SetVariablesList(variablesList);
             PrintVariables();
@@ -356,19 +350,59 @@ namespace MCUHelper
 
         private void richTextBox1_MouseDown(object sender, MouseEventArgs e)
         {
-            //MouseEventArgs mArg = (MouseEventArgs)e;
-            int lineIndex = GetLineNumberOfSelection();
-            clickedVar = variablesList.GetVariableByIndex(lineIndex);
-            if (clickedVar != null)
+           
+
+            if (e.Button == System.Windows.Forms.MouseButtons.Left)
             {
-                variableTextBox.Text = clickedVar.FullName;
-                newValueTextBox.Enabled = !(clickedVar is ElfObjectWithChildrens);
-                newValueTextBox.Text = clickedVar.GetStrValue();
+                int lineIndex = GetLineNumberOfSelection();
+                clickedVar = variablesList.GetVariableByIndex(lineIndex);
+
+                if (clickedVar != null)
+                {
+                    variableTextBox.Text = clickedVar.FullName;
+                    newValueTextBox.Enabled = !(clickedVar is ElfObjectWithChildrens);
+                    newValueTextBox.Text = clickedVar.GetStrValue();
+                }
+            }
+            else if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            {
+                int index = richTextBox1.GetCharIndexFromPosition(e.Location);
+                richTextBox1.Select(index, 0);
+
+                int lineIndex = GetLineNumberOfSelection();
+                clickedVar = variablesList.GetVariableByIndex(lineIndex);
+
+                if (clickedVar != null)
+                {
+                    variablesContextMenu.Items[0].Text = "Remove " + clickedVar.Name;
+                    variablesContextMenu.Items[0].Tag = clickedVar;
+                    variablesContextMenu.Show(richTextBox1, e.Location);
+                }
             }
         }
 
-        
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            variablesList.variables.Clear();
+        }
 
-        
+        private void removeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (variablesContextMenu.Items[0].Tag is  ElfVariable)
+            {
+                ElfVariable elfVar = variablesContextMenu.Items[0].Tag  as ElfVariable;
+                variablesList.RemoveVariable(elfVar);
+            }
+        }
+
+        private void richTextBox1_ContextMenuStripChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void variablesContextMenu_Opening(object sender, CancelEventArgs e)
+        {
+            
+        }
     }
 }

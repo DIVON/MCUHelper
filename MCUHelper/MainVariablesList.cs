@@ -95,7 +95,7 @@ namespace MCUHelper
             return len;
         }        
 
-        FieldDataType GetVariableDataType(String datatypeString)
+        public FieldDataType GetVariableDataType(String datatypeString)
         {
             String[] splitted = datatypeString.Split(' ');
             int index = 3;
@@ -229,8 +229,6 @@ namespace MCUHelper
                 /* Is it an array? */
                 int arrayLen = isItAnArray(varInfo, datatype);
                 
-               
-
                 if (arrayLen == -1)
                 {
                     /* Is it a structure? */
@@ -321,6 +319,12 @@ namespace MCUHelper
             return null;
         }
 
+
+        void RestoreElement(XElement variableElement)
+        {
+
+        }
+
         public void UpdateVariables()
         {
             foreach(String var in addedVariables)
@@ -328,10 +332,6 @@ namespace MCUHelper
                 UpdateVariable(var, null, var);
             }
         }
-
-       
-
-
 
         public ElfVariable GetVariable(String variableName)
         {
@@ -436,6 +436,18 @@ namespace MCUHelper
                 }
             }
             return variable;
+        }
+
+        public void RemoveVariable(ElfVariable variable)
+        {
+            if (variable.Parent != null)
+            {
+                variable.Parent.Childrens.Remove(variable);
+            }
+            else
+            {
+                this.variables.Remove(variable);
+            }
         }
     }
 }

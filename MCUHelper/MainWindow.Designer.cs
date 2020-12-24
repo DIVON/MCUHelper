@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -39,15 +38,16 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.saveViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.lastElfToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lastViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.scrollBarEditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveViewDialog = new System.Windows.Forms.OpenFileDialog();
             this.elfFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.openViewDialog = new System.Windows.Forms.OpenFileDialog();
-            this.controlExtensionsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.saveViewDialog = new System.Windows.Forms.SaveFileDialog();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.controlExtensionsBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -76,6 +76,9 @@
             this.toolStripSeparator1,
             this.saveViewToolStripMenuItem,
             this.toolStripSeparator2,
+            this.lastElfToolStripMenuItem,
+            this.lastViewToolStripMenuItem,
+            this.toolStripSeparator3,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
@@ -87,7 +90,7 @@
             this.elfToolStripMenuItem,
             this.viewToolStripMenuItem});
             this.openElfToolStripMenuItem.Name = "openElfToolStripMenuItem";
-            this.openElfToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.openElfToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.openElfToolStripMenuItem.Text = "Open";
             // 
             // elfToolStripMenuItem
@@ -107,24 +110,43 @@
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(122, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             // 
             // saveViewToolStripMenuItem
             // 
             this.saveViewToolStripMenuItem.Name = "saveViewToolStripMenuItem";
-            this.saveViewToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.saveViewToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveViewToolStripMenuItem.Text = "Save view";
             this.saveViewToolStripMenuItem.Click += new System.EventHandler(this.saveViewToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(122, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
+            // 
+            // lastElfToolStripMenuItem
+            // 
+            this.lastElfToolStripMenuItem.Name = "lastElfToolStripMenuItem";
+            this.lastElfToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.lastElfToolStripMenuItem.Text = "LastElf";
+            this.lastElfToolStripMenuItem.Click += new System.EventHandler(this.lastElfToolStripMenuItem_Click);
+            // 
+            // lastViewToolStripMenuItem
+            // 
+            this.lastViewToolStripMenuItem.Name = "lastViewToolStripMenuItem";
+            this.lastViewToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.lastViewToolStripMenuItem.Text = "LastView";
+            this.lastViewToolStripMenuItem.Click += new System.EventHandler(this.lastViewToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(149, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
             // editToolStripMenuItem
@@ -142,10 +164,6 @@
             this.scrollBarEditToolStripMenuItem.Text = "ScrollBar edit";
             this.scrollBarEditToolStripMenuItem.Click += new System.EventHandler(this.scrollBarEditToolStripMenuItem_Click);
             // 
-            // saveViewDialog
-            // 
-            this.saveViewDialog.Filter = "Vmm files|*.vmm|All files|*.*";
-            // 
             // elfFileDialog
             // 
             this.elfFileDialog.Filter = "Elf files|*.elf|All files|*.*";
@@ -153,10 +171,6 @@
             // openViewDialog
             // 
             this.openViewDialog.Filter = "Vmm files|*.vmm|All files|*.*";
-            // 
-            // controlExtensionsBindingSource
-            // 
-            this.controlExtensionsBindingSource.DataSource = typeof(System.Windows.Forms.ControlExtensions);
             // 
             // MainWindow
             // 
@@ -172,7 +186,6 @@
             this.Text = "MCU Helper";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.controlExtensionsBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -190,11 +203,13 @@
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem elfToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
-        private System.Windows.Forms.OpenFileDialog saveViewDialog;
         private System.Windows.Forms.OpenFileDialog elfFileDialog;
         private System.Windows.Forms.OpenFileDialog openViewDialog;
-        private System.Windows.Forms.BindingSource controlExtensionsBindingSource;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem scrollBarEditToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem lastElfToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem lastViewToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.SaveFileDialog saveViewDialog;
     }
 }

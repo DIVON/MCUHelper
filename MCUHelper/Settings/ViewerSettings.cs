@@ -157,10 +157,28 @@ namespace MCUHelper.Settings
 
             IEnumerable<XElement> names = mvEl.Elements();
             for (int i = 0; i < names.Count(); i++)
-            {
-                String value = names.ElementAt(i).Value;
+            {                
+                String value = names.ElementAt(i).Attribute("Name").Value;
                 mainVariablesList.UpdateVariable(value, null, value);
             }      
+        }
+
+        void RestoreElement(MainVariablesList mainVariablesList, XElement variableElement)
+        {
+            String name = variableElement.Attribute("Name").Value;
+
+            XElement childElem = variableElement.Element("Children");
+            if (childElem == null)
+            {
+                mainVariablesList.UpdateVariable(name, null, name);
+            }
+            else
+            {
+                for(int i = 0; i < childElem.Elements().Count(); i++)
+                {
+                    //childElem.Elements()
+                }
+            }
         }
 
         void SaveVariableNames(ElfVariableList variables, XElement root)
@@ -168,8 +186,7 @@ namespace MCUHelper.Settings
             XElement allVariablesElement = new XElement("AllVariables");
             foreach(ElfVariable variable in variables)
             {
-                XElement varEl = new XElement("Variable", variable.Name);
-                allVariablesElement.Add(varEl);
+                variable.WriteToXml(allVariablesElement);
             }
             root.Add(allVariablesElement);
         }        

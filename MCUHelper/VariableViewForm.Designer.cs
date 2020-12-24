@@ -41,8 +41,12 @@ namespace MCUHelper
             this.newValueTextBox = new System.Windows.Forms.TextBox();
             this.variableTextBox = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button2 = new System.Windows.Forms.Button();
+            this.variablesContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.removeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.richTextBox1 = new System.Windows.Forms.ViewOnlyRichTextBox();
             this.groupBox1.SuspendLayout();
+            this.variablesContextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // connectButton
@@ -108,7 +112,6 @@ namespace MCUHelper
             this.button1.TabIndex = 16;
             this.button1.Text = "Reload ELF";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Visible = false;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // timer2
@@ -149,6 +152,31 @@ namespace MCUHelper
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Variable update";
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(533, 12);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 21;
+            this.button2.Text = "Clear";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click_1);
+            // 
+            // variablesContextMenu
+            // 
+            this.variablesContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.removeToolStripMenuItem});
+            this.variablesContextMenu.Name = "contextMenuStrip1";
+            this.variablesContextMenu.Size = new System.Drawing.Size(174, 26);
+            this.variablesContextMenu.Opening += new System.ComponentModel.CancelEventHandler(this.variablesContextMenu_Opening);
+            // 
+            // removeToolStripMenuItem
+            // 
+            this.removeToolStripMenuItem.Name = "removeToolStripMenuItem";
+            this.removeToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.removeToolStripMenuItem.Text = "Remove from view";
+            this.removeToolStripMenuItem.Click += new System.EventHandler(this.removeToolStripMenuItem_Click);
+            // 
             // richTextBox1
             // 
             this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -166,6 +194,7 @@ namespace MCUHelper
             this.richTextBox1.Text = "";
             this.richTextBox1.WordWrap = false;
             this.richTextBox1.Click += new System.EventHandler(this.richTextBox1_Click);
+            this.richTextBox1.ContextMenuStripChanged += new System.EventHandler(this.richTextBox1_ContextMenuStripChanged);
             this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
             this.richTextBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.richTextBox1_MouseDown);
             // 
@@ -174,6 +203,7 @@ namespace MCUHelper
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(721, 585);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox1);
@@ -191,6 +221,7 @@ namespace MCUHelper
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.variablesContextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -210,6 +241,9 @@ namespace MCUHelper
         private TextBox newValueTextBox;
         private TextBox variableTextBox;
         private GroupBox groupBox1;
+        private Button button2;
+        private ContextMenuStrip variablesContextMenu;
+        private ToolStripMenuItem removeToolStripMenuItem;
     }
 }
 

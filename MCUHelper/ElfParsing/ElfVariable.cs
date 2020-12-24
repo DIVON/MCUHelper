@@ -66,6 +66,11 @@ namespace MCUHelper.ElfParsing
             return null;
         }
 
+        public virtual int GetBytes(String val)
+        {
+            return 0;
+        }
+
         public String FullName
         {
             get
@@ -94,6 +99,18 @@ namespace MCUHelper.ElfParsing
             String datatypeStr = XmlUtilits.GetFieldValue(xml, "DataType", "ERROR");
             datatype = (FieldDataType)Enum.Parse(typeof(FieldDataType), datatypeStr);
         }
+
+        /* Returns the root node of element */
+        public virtual XElement WriteToXml(XElement root)
+        {
+            XElement varElement = new XElement("Variable");
+            XAttribute nameAttrib = new XAttribute("Name", Name);
+            varElement.Add(nameAttrib);
+            root.Add(varElement);
+            return varElement;
+        }
+
+        
     }
 
     public class ElfVariableList : List<ElfVariable>
@@ -150,6 +167,15 @@ namespace MCUHelper.ElfParsing
         {
             return _value.ToString();
         }
+
+        public override int GetBytes(String val)
+        {
+            val = val.Replace(".", ",");
+            byte outVal = 0;
+            byte.TryParse(val, out outVal);
+
+            return outVal;
+        }
     }
 
     public class ElfUnsignedChar : ElfVariable
@@ -178,6 +204,15 @@ namespace MCUHelper.ElfParsing
         {
             return _value.ToString();
         }
+
+        public override int GetBytes(String val)
+        {
+            val = val.Replace(".", ",");
+            byte outVal = 0;
+            byte.TryParse(val, out outVal);
+
+            return outVal;
+        }
     }
 
     public class ElfShort : ElfVariable
@@ -203,6 +238,15 @@ namespace MCUHelper.ElfParsing
         public override String GetStrValue()
         {
             return _value.ToString();
+        }
+
+        public override int GetBytes(String val)
+        {
+            val = val.Replace(".", ",");
+            short outVal = 0;
+            short.TryParse(val, out outVal);
+
+            return outVal;
         }
     }
 
@@ -230,6 +274,15 @@ namespace MCUHelper.ElfParsing
         {
             return _value.ToString();
         }
+
+        public override int GetBytes(String val)
+        {
+            val = val.Replace(".", ",");
+            UInt16 outVal = 0;
+            UInt16.TryParse(val, out outVal);
+
+            return outVal;
+        }
     }
 
     public class ElfInt : ElfVariable
@@ -255,6 +308,15 @@ namespace MCUHelper.ElfParsing
         public override String GetStrValue()
         {
             return _value.ToString();
+        }
+
+        public override int GetBytes(String val)
+        {
+            val = val.Replace(".", ",");
+            int outVal = 0;
+            int.TryParse(val, out outVal);
+
+            return outVal;
         }
     }
 
@@ -282,6 +344,15 @@ namespace MCUHelper.ElfParsing
         {
             return _value.ToString();
         }
+
+        public override int GetBytes(String val)
+        {
+            val = val.Replace(".", ",");
+            UInt32 outVal = 0;
+            UInt32.TryParse(val, out outVal);
+
+            return unchecked((int)outVal);
+        }
     }
 
     public class ElfLong : ElfVariable
@@ -308,6 +379,15 @@ namespace MCUHelper.ElfParsing
         {
             return _value.ToString();
         }
+
+        public override int GetBytes(String val)
+        {
+            val = val.Replace(".", ",");
+            Int32 outVal = 0;
+            Int32.TryParse(val, out outVal);
+
+            return outVal;
+        }
     }
 
     public class ElfUnsignedLong : ElfVariable
@@ -333,6 +413,15 @@ namespace MCUHelper.ElfParsing
         public override String GetStrValue()
         {
             return _value.ToString();
+        }
+
+        public override int GetBytes(String val)
+        {
+            val = val.Replace(".", ",");
+            UInt32 outVal = 0;
+            UInt32.TryParse(val, out outVal);
+
+            return unchecked((int)outVal);
         }
     }
 
@@ -367,7 +456,7 @@ namespace MCUHelper.ElfParsing
             return addStr + _value.ToString().Replace(",", ".");
         }
 
-        public static int getBytes(String val)
+        public override int GetBytes(String val)
         {
             val = val.Replace(".", ",");
             float fValue;
@@ -404,6 +493,15 @@ namespace MCUHelper.ElfParsing
         {
             return "0x" + _value.ToString("X");
         }
+
+        public override int GetBytes(String val)
+        {
+            val = val.Replace(".", ",");
+            int outVal = 0;
+            int.TryParse(val, out outVal);
+
+            return outVal;
+        }
     }
 
 
@@ -431,6 +529,21 @@ namespace MCUHelper.ElfParsing
             Name = XmlUtilits.GetFieldValue(xml, "Name", "ERROR");
             String datatypeStr = XmlUtilits.GetFieldValue(xml, "DataType", "ERROR");
             datatype = (FieldDataType)Enum.Parse(typeof(FieldDataType), datatypeStr);
+        }
+
+        public override XElement WriteToXml(XElement root)
+        {
+            XElement elementNode = base.WriteToXml(root);
+           // XAttribute attr = new XAttribute("hasChildren", true);
+
+            XElement childrenNode = new XElement("Children");
+            elementNode.Add(childrenNode);
+            foreach(ElfVariable elfVar in this.Childrens)
+            {
+                elfVar.WriteToXml(childrenNode);
+            }
+
+            return elementNode;
         }
     }
 

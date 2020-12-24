@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\ControlExtensions.cs" />
+    <Compile Include="Controls\MenuLastItems.cs" />
     <Compile Include="Controls\ViewOnlyRichTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -135,9 +136,9 @@
     <None Include="Images\Magnifier.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Data\**" >
-		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	</Content>
+    <Content Include="Data\**">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="week_4.ico" />
   </ItemGroup>
   <ItemGroup>
