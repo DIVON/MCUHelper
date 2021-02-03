@@ -171,6 +171,7 @@ namespace MCUHelper.ElfParsing
 
             getValueThread = new Thread(new ThreadStart(UpdateValuesHandler));
             getValueThread.Priority = ThreadPriority.Highest;
+            getValueThread.IsBackground = true;
             getValueThread.Start();
 
             _event.Reset();
@@ -178,18 +179,21 @@ namespace MCUHelper.ElfParsing
 
         void serialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            byte[] buf = new byte[serialPort.BytesToRead];
-
-            serialPort.Read(buf, 0, buf.Length);
- 
-            receivedData.AddRange(buf);
-
-            Boolean variableUpdated = UpdateVariableValue(receivedData);
-
-            if (variableUpdated)
+            if (serialPort.IsOpen)
             {
-                receivedData.Clear();
-                getDataEvent.Set();
+                byte[] buf = new byte[serialPort.BytesToRead];
+
+                serialPort.Read(buf, 0, buf.Length);
+
+                receivedData.AddRange(buf);
+
+                Boolean variableUpdated = UpdateVariableValue(receivedData);
+
+                if (variableUpdated)
+                {
+                    receivedData.Clear();
+                    getDataEvent.Set();
+                }
             }
         }
 
@@ -256,14 +260,23 @@ namespace MCUHelper.ElfParsing
         const int rxCount = 2 + 1 + MaxVariableCount * 8;
 
         int prevLastIndex = 0;
+        int previousFieldsCount = 0;
 
         void SendReadCommand()
         {
+
             byte[] data = new byte[MaxVariableCount * 4 + 3];
             data[0] = (byte)0xA5;
             data[1] = (byte)0xB3;
 
             ElfVariableList fields = variables.GetAllFields();
+            
+            if (previousFieldsCount != fields.Count)
+            {
+                previousFieldsCount = 0;
+                prevLastIndex = 0;
+            }
+
             if (fields.Count <= MaxVariableCount)
             {
                 for (int i = 0; i < fields.Count; i++)
@@ -285,9 +298,10 @@ namespace MCUHelper.ElfParsing
             }
             else
             {
+                
                 if (prevLastIndex + MaxVariableCount <= fields.Count)
                 {
-                    for (int i = prevLastIndex; i < prevLastIndex + MaxVariableCount; i++)
+                    for (int i = prevLastIndex + 1; i <= prevLastIndex + MaxVariableCount; i++)
                     {
                         int address = Convert.ToInt32(fields[i].Address, 16);
                         data[(i % MaxVariableCount) * 4 + 2] = (byte)(address & 0xFF);
@@ -296,6 +310,7 @@ namespace MCUHelper.ElfParsing
                         data[(i % MaxVariableCount) * 4 + 2 + 3] = (byte)((address >> 24) & 0xFF);
                     }
                     prevLastIndex = prevLastIndex + MaxVariableCount;
+                    
                     if (prevLastIndex == fields.Count)
                     {
                         prevLastIndex = 0;
@@ -304,7 +319,7 @@ namespace MCUHelper.ElfParsing
                 else
                 {
                     int byteIndex = 0;
-                    for (int i = prevLastIndex; i < fields.Count; i++)
+                    for (int i = prevLastIndex + 1; i < fields.Count; i++)
                     {    
                         int address = Convert.ToInt32(fields[i].Address, 16);
                         int startByteIndex = byteIndex * 4 + 2;
@@ -314,9 +329,9 @@ namespace MCUHelper.ElfParsing
                         data[startByteIndex + 3] = (byte)((address >> 24) & 0xFF);
                         byteIndex++;
                     }
-                
-                    int count = fields.Count - prevLastIndex;
-                    for (int i = 0; i < MaxVariableCount - count; i++)
+
+                    int count = MaxVariableCount - (fields.Count - prevLastIndex) + 1;
+                    for (int i = 0; i < count; i++)
                     {
                         int address = Convert.ToInt32(fields[i].Address, 16);
                         int startByteIndex = byteIndex * 4 + 2;
@@ -335,20 +350,43 @@ namespace MCUHelper.ElfParsing
 
             if (serialPort.IsOpen)
             {
-                serialPort.Write(data, 0, MaxVariableCount * 4 + 3);
+                try
+                {
+                    serialPort.Write(data, 0, MaxVariableCount * 4 + 3);
+                }
+                catch
+                {
+
+                }
             }
+
+            previousFieldsCount = fields.Count;
         }
 
         void IValuesUpdater.StartUpdate()
         {
-            serialPort.Open();
+            try
+            {
+                serialPort.Open();
+            }
+            catch
+            {
+
+            }
             _event.Set();
         }
 
         void IValuesUpdater.StopUpdate()
         {
             _event.Reset();
-            serialPort.Close();
+            try
+            {
+                serialPort.Close();
+            }
+            catch
+            {
+
+            }
         }
 
 

@@ -32,7 +32,7 @@ namespace MCUHelper
 
             valuesUpdater = new SerialPortUpdater();
 
-            displayTimer = new HighResolutionTimer(100.0f);
+            displayTimer = new HighResolutionTimer(200.0f);
             displayTimer.UseHighPriorityThread = false;
             displayTimer.Elapsed += displayTimer_Elapsed;
 
@@ -242,9 +242,10 @@ namespace MCUHelper
                 /* Add variable to view list */
                 if (textBox1.Text.Contains('=') == false)
                 {
+                    mainDisplayTimer.Enabled = false;
                     variablesList.UpdateVariable(textBox1.Text, null, textBox1.Text);
                     PrintVariable(variablesList.variables[variablesList.variables.Count - 1], 0);
-
+                    mainDisplayTimer.Enabled = true;
                     textBox1.Text = "";
                 }
                 else

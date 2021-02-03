@@ -115,7 +115,7 @@ namespace MCUHelper
             {
                 ViewerSettings settingsSaver = new ViewerSettings();
                 settingsSaver.LoadFromFile(Properties.Settings.Default.LastView0, variablesForm.VariablesList, this, variablesForm, scrollBarWindows);
-                Properties.Settings.Default.LastView0 = openViewDialog.FileName;
+                //Properties.Settings.Default.LastView0 = openViewDialog.FileName;
                 Properties.Settings.Default.Save();
             }
         }

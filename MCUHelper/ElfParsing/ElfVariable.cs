@@ -223,10 +223,10 @@ namespace MCUHelper.ElfParsing
             base.length = 2;
         }
 
-        short _value;
+        Int16 _value;
         public override void UpdateValue(byte[] value)
         {
-            short val = Convert.ToInt16(value[1] << 8 | value[0]);
+            Int16 val = BitConverter.ToInt16(value, 0);
             _value = val;
         }
 
@@ -243,8 +243,8 @@ namespace MCUHelper.ElfParsing
         public override int GetBytes(String val)
         {
             val = val.Replace(".", ",");
-            short outVal = 0;
-            short.TryParse(val, out outVal);
+            Int16 outVal = 0;
+            Int16.TryParse(val, out outVal);
 
             return outVal;
         }
