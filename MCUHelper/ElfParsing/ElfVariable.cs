@@ -401,7 +401,7 @@ namespace MCUHelper.ElfParsing
         UInt32 _value;
         public override void UpdateValue(byte[] value)
         {
-            var val = Convert.ToUInt32((value[3] << 24) | (value[2] << 16) | (value[1] << 8) | value[0]);
+            var val = Convert.ToUInt32((value[3] *8 *8 *8) | (value[2] *8*8) | (value[1] *8* 8) | value[0]);
             _value = val;
         }
 
