@@ -182,11 +182,11 @@ namespace MCUHelper
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            parser = new ElfParser(@"D:\Projects\MASS\MCU\Debug\SuspensionStand.elf");
+            parser = new ElfParser(@"D:\Projects\MASS\McuC++\build\MakeFiles\release_none\ShockAbsorber.elf");
 
             variablesList = new MainVariablesList(parser);
 
-            variablesList.UpdateVariable("cinADCDriver", null, "cinADCDriver");
+            variablesList.UpdateVariable("uwTick", null, "uwTick");
             variablesList.UpdateVariable("cinBatteryVoltageProvider", null, "cinBatteryVoltageProvider");
 
             valuesUpdater.SetVariablesList(variablesList);
@@ -243,8 +243,16 @@ namespace MCUHelper
                 if (textBox1.Text.Contains('=') == false)
                 {
                     mainDisplayTimer.Enabled = false;
-                    variablesList.UpdateVariable(textBox1.Text, null, textBox1.Text);
-                    PrintVariable(variablesList.variables[variablesList.variables.Count - 1], 0);
+                    var variable = variablesList.UpdateVariable(textBox1.Text, null, textBox1.Text);
+                    if (variable == null)
+                    {
+                        MessageBox.Show(textBox1.Text + " не найдено");
+                        return;
+                    }
+                    if (variablesList.variables.Count > 0)
+                    {
+                        PrintVariable(variablesList.variables[variablesList.variables.Count - 1], 0);
+                    }
                     mainDisplayTimer.Enabled = true;
                     textBox1.Text = "";
                 }
@@ -404,6 +412,11 @@ namespace MCUHelper
         private void variablesContextMenu_Opening(object sender, CancelEventArgs e)
         {
             
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            variablesList.parser.GetAllVariables();
         }
     }
 }

@@ -10,7 +10,7 @@ namespace MCUHelper
 {
     public class MainVariablesList
     {
-        ElfParser parser;
+        public ElfParser parser;
         public MainVariablesList (ElfParser parser)
         {
             this.parser = parser;
@@ -223,6 +223,7 @@ namespace MCUHelper
                 {
                     parent.Childrens.Add(pointer);
                 }
+                return pointer;
             }
             else 
             {
@@ -266,6 +267,7 @@ namespace MCUHelper
                         {
                             parent.Childrens.Add(variableStruct);
                         }
+                        return variableStruct;
                     }
                     else if (datatype != FieldDataType.dftUnknown)
                     {
@@ -284,7 +286,6 @@ namespace MCUHelper
                         else
                         {
                             variables.Add(variable);
-
                         }
 
                         if (datatype == FieldDataType.dftEnum)
@@ -294,6 +295,7 @@ namespace MCUHelper
                                 UpdateEnumValues(varInfo, (ElfEnum)variable);
                             }
                         }
+                        return variable;
                     }
                 }
                 else
@@ -314,6 +316,7 @@ namespace MCUHelper
                         String elemName = varName + "[" + i + "]";
                         UpdateVariable(elemName, newArray, gdbName + "[" + i + "]");
                     }
+                    return newArray;
                 }
             }
             return null;

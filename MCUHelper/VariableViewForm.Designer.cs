@@ -45,6 +45,7 @@ namespace MCUHelper
             this.variablesContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.removeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.richTextBox1 = new System.Windows.Forms.ViewOnlyRichTextBox();
+            this.button3 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.variablesContextMenu.SuspendLayout();
             this.SuspendLayout();
@@ -99,7 +100,7 @@ namespace MCUHelper
             this.textBox1.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBox1.Location = new System.Drawing.Point(11, 57);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(701, 23);
+            this.textBox1.Size = new System.Drawing.Size(1041, 23);
             this.textBox1.TabIndex = 14;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             this.textBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyDown);
@@ -123,7 +124,7 @@ namespace MCUHelper
             // newValueTextBox
             // 
             this.newValueTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.newValueTextBox.Location = new System.Drawing.Point(583, 19);
+            this.newValueTextBox.Location = new System.Drawing.Point(923, 19);
             this.newValueTextBox.Name = "newValueTextBox";
             this.newValueTextBox.Size = new System.Drawing.Size(111, 20);
             this.newValueTextBox.TabIndex = 18;
@@ -136,7 +137,7 @@ namespace MCUHelper
             this.variableTextBox.Location = new System.Drawing.Point(6, 19);
             this.variableTextBox.Name = "variableTextBox";
             this.variableTextBox.ReadOnly = true;
-            this.variableTextBox.Size = new System.Drawing.Size(571, 20);
+            this.variableTextBox.Size = new System.Drawing.Size(911, 20);
             this.variableTextBox.TabIndex = 19;
             // 
             // groupBox1
@@ -147,7 +148,7 @@ namespace MCUHelper
             this.groupBox1.Controls.Add(this.newValueTextBox);
             this.groupBox1.Location = new System.Drawing.Point(12, 525);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(700, 48);
+            this.groupBox1.Size = new System.Drawing.Size(1040, 48);
             this.groupBox1.TabIndex = 20;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Variable update";
@@ -189,7 +190,7 @@ namespace MCUHelper
             this.richTextBox1.Location = new System.Drawing.Point(11, 86);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(701, 433);
+            this.richTextBox1.Size = new System.Drawing.Size(1041, 433);
             this.richTextBox1.TabIndex = 13;
             this.richTextBox1.Text = "";
             this.richTextBox1.WordWrap = false;
@@ -198,11 +199,22 @@ namespace MCUHelper
             this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
             this.richTextBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.richTextBox1_MouseDown);
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(650, 12);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(160, 23);
+            this.button3.TabIndex = 22;
+            this.button3.Text = "button3";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // VariableViewForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(721, 585);
+            this.ClientSize = new System.Drawing.Size(1061, 585);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button1);
@@ -244,6 +256,7 @@ namespace MCUHelper
         private Button button2;
         private ContextMenuStrip variablesContextMenu;
         private ToolStripMenuItem removeToolStripMenuItem;
+        private Button button3;
     }
 }
 

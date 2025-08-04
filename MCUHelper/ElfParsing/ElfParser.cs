@@ -30,7 +30,8 @@ namespace MCUHelper.ElfParsing
             this.fileName = fileName;
 
             p = new Process();
-            p.StartInfo.FileName = Path.GetDirectoryName(Application.ExecutablePath) + @"\Data\arm-none-eabi-gdb.exe";
+           // p.StartInfo.FileName = Path.GetDirectoryName(Application.ExecutablePath) + @"\Data\arm-none-eabi-gdb.exe";
+            p.StartInfo.FileName = @"C:\Programs\arm-none-eabi\14.3_rel1\bin\arm-none-eabi-gdb.exe";
             p.StartInfo.Arguments = "-q \"" + fileName + "\"";
             p.StartInfo.UseShellExecute = false;
             p.StartInfo.RedirectStandardOutput = true;
@@ -186,7 +187,7 @@ namespace MCUHelper.ElfParsing
 
         public String GetVariableInfo(String variableName)
         {
-            String answer = SendCommand("ptype " + variableName +"\r\n", 1);
+            String answer = SendCommand("ptype " + variableName, 1);
             
             return answer;
         }

@@ -18,7 +18,8 @@ namespace MCUHelper
         {
             InitializeComponent();
 
-            if (File.Exists(Properties.Settings.Default.LastElf0))
+            string lastElf = Properties.Settings.Default.LastElf0;
+            if (File.Exists(lastElf))
             {
                 lastElfToolStripMenuItem.Text = "Last elf: " + Properties.Settings.Default.LastElf0;
                 lastViewToolStripMenuItem.Text = "Last view: " + Properties.Settings.Default.LastView0;
